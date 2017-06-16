@@ -14,6 +14,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         view()->composer('layout', 'App\Http\Composers\MasterComposer');
+        view()->composer('m.bookings.form', 'App\Http\Composers\MasterComposer');
     }
 
     /**

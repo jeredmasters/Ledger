@@ -3,57 +3,65 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Booking extends Model implements \MaddHatter\LaravelFullcalendar\Event
+class Booking extends Model
 {
+    protected $dates = ['from','to'];
+    protected $table = 'bookings';
 
-    protected $dates = ['start', 'end'];
-
-    /**
-     * Get the event's id number
-     *
-     * @return int
-     */
-    public function getId() {
-		return $this->id;
-	}
-
-    /**
-     * Get the event's title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->title;
+    public function areas(){
+        $areas = [];
+        if ($this->main){
+            $areas[] = 'M';
+        }
+        if ($this->flat){
+            $areas[] = 'F';
+        }
+        if ($this->studio){
+            $areas[] = 'S';
+        }
+        return join(',',$areas);
     }
-
-    /**
-     * Is it an all day event?
-     *
-     * @return bool
-     */
-    public function isAllDay()
-    {
-        return (bool)$this->all_day;
-    }
-
-    /**
-     * Get the start time
-     *
-     * @return DateTime
-     */
-    public function getStart()
-    {
-        return $this->start;
-    }
-
-    /**
-     * Get the end time
-     *
-     * @return DateTime
-     */
-    public function getEnd()
-    {
-        return $this->end;
+    public function toEvents(){
+        $events = [];
+        if ($this->main){
+            $events[] = [
+                'id' => $this->id,
+                'title' => $this->name, //event title
+                'allDay' => true, //full day event?
+                'start' => $this->from->format('Y-m-d'), //start time (you can also use Carbon instead of DateTime)
+                'end' => $this->to->format('Y-m-d'), //end time (you can also use Carbon instead of DateTime)
+                'color' => config('areas.main.color'),
+                'main' => $this->main == "1",
+                'flat' => $this->flat == "1",
+                'studio' => $this->studio == "1"
+            ];
+        }
+        if ($this->flat){
+            $events[] = [
+                'id' => $this->id,
+                'title' => $this->name, //event title
+                'allDay' => true, //full day event?
+                'start' => $this->from->format('Y-m-d'), //start time (you can also use Carbon instead of DateTime)
+                'end' => $this->to->format('Y-m-d'), //end time (you can also use Carbon instead of DateTime)
+                'color' => config('areas.flat.color'),
+                'main' => $this->main == "1",
+                'flat' => $this->flat == "1",
+                'studio' => $this->studio == "1"
+            ];
+        }
+        if ($this->studio){
+            $events[] = [
+                'id' => $this->id,
+                'title' => $this->name, //event title
+                'allDay' => true, //full day event?
+                'start' => $this->from->format('Y-m-d'), //start time (you can also use Carbon instead of DateTime)
+                'end' => $this->to->format('Y-m-d'), //end time (you can also use Carbon instead of DateTime)
+                'color' => config('areas.studio.color'),
+                'main' => $this->main == "1",
+                'flat' => $this->flat == "1",
+                'studio' => $this->studio == "1"
+            ];
+        }
+        return $events;
     }
 }

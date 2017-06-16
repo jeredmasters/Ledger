@@ -12,13 +12,21 @@
 */
 
 Route::get('/', function () {
-    return view('facebook');
+    return view('welcome');
 })->name('welcome');
-Route::get('login/facebook', 'Auth\FacebookController@redirectToProvider');\
-Route::get('login/facebook/push', 'Auth\FacebookController@handleJsPush');
-Route::get('login/facebook/callback', 'Auth\FacebookController@handleProviderCallback');
 
-Route::post('/auth/check', 'LoginController@check')->name('login');
+
 Route::group(['prefix' => '/m','middleware' => 'simpleauth'], function () {
-    Route::get('calendar', 'LogisticsController@calendar')->name('calendar');
+    Route::get('calendar', 'CalendarController@calendar')->name('calendar');
+    Route::resource('bookings', 'BookingsController');
+});
+
+Route::group(['prefix' => '/admin','middleware' => 'simpleauth'], function () {
+    Route::resource('users', 'Admin\UsersController');
+});
+
+Route::group(['prefix' => '/login'], function () {
+    Route::get('facebook', 'Auth\FacebookController@redirectToProvider');
+    Route::get('facebook/push', 'Auth\FacebookController@handleJsPush');
+    Route::get('facebook/callback', 'Auth\FacebookController@handleProviderCallback');
 });

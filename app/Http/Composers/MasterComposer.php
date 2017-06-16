@@ -2,6 +2,7 @@
 namespace App\Http\Composers;
 
 use Illuminate\Contracts\View\View;
+use App\Models\User;
 
 class MasterComposer {
 
@@ -9,10 +10,13 @@ class MasterComposer {
     {
         $user = session('user', null);
         if ($user !== null){
+            $user = User::find($user->id);
             $view->with('userName', $user->name);
+            $view->with('userAccess', $user->access);
         }
         else{
-            $view->with('userName', 'a');
+            $view->with('userName', '');
+            $view->with('userAccess', 0);
         }
     }
 

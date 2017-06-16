@@ -15,11 +15,18 @@ class CreatBookingsTable extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');            
+            $table->integer('user_id');
+            $table->string('name');
             $table->boolean('main');
             $table->boolean('flat');
             $table->boolean('studio');
+            $table->datetime('from');
+            $table->datetime('to');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')->on('users')
+                ->onDelete('cascade');
         });
     }
 
