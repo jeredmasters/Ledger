@@ -12,8 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('facebook');
 })->name('welcome');
+Route::get('login/facebook', 'Auth\FacebookController@redirectToProvider');\
+Route::get('login/facebook/push', 'Auth\FacebookController@handleJsPush');
+Route::get('login/facebook/callback', 'Auth\FacebookController@handleProviderCallback');
+
 Route::post('/auth/check', 'LoginController@check')->name('login');
 Route::group(['prefix' => '/m','middleware' => 'simpleauth'], function () {
     Route::get('calendar', 'LogisticsController@calendar')->name('calendar');

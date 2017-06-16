@@ -15,9 +15,9 @@ class SimpleAuth
      */
     public function handle($request, Closure $next)
     {
-        if ($request->session()->get('authenticated') !== true){
+        if ($request->session()->get('user', null) === null){
             return redirect()->route('welcome');
         }
-        return $next($request);        
+        return $next($request);
     }
 }

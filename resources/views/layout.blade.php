@@ -24,11 +24,10 @@
     </head>
     <body>
         <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-            <a class="navbar-brand" href="#">Blue Orchid</a>
-
+            <a class="navbar-brand" href="#"></a>
+            {{ $userName }}
             <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
-                </ul>
             </div>
         </nav>
         <div class="container">

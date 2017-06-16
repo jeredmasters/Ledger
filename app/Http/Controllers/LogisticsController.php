@@ -29,15 +29,20 @@ class LogisticsController extends Controller
 
         //$eloquentEvent = Booking::first(); //EventModel implements MaddHatter\LaravelFullcalendar\Event
 
-        $calendar = \Calendar::addEvents($events); //add an array with addEvents
-            // ->addEvent($eloquentEvent, [ //set custom color fo this event
-            //     'color' => '#800',
-            // ])->setOptions([ //set fullcalendar options
-        	// 	'firstDay' => 1
-        	// ])->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
-            //     'viewRender' => 'function() {alert("Callbacks!");}'
-            // ]);
+        $calendar = \Calendar::addEvents($events)
+        ->setOptions([ //set fullcalendar options
+          'header' => [
+              'left' => 'prev,next',
+              'center' => 'title',
+              'right' => ''
+          ]
+         ])
+         ->setCallbacks([ //set fullcalendar callback options (will not be JSON encoded)
+             'dayClick' => 'window.calendar.dayClick'
+         ]);
 
-        return view('calendar', compact('calendar'));
+         $user = $request->session()->get('user');
+
+        return view('calendar', compact('calendar','user'));
     }
 }

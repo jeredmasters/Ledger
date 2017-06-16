@@ -12,7 +12,7 @@
 
 @section('content')
   <div class="jumbotron">
-    <h1>Welcome</h1>
+    <h1>The Ledger</h1>
     <p>To get started please type in the password below. </p>
     <form action="/auth/check" method="POST" >
         {{ csrf_field() }}
