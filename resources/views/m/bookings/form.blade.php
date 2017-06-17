@@ -5,17 +5,19 @@
             {{ Form::label('name', 'Name') }}
             {{ Form::text('name', old('name', $userName), array('class' => 'form-control')) }}
         </div>
-
-        <div class="form-group col-sm-12">
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-6">
             {{ Form::label('from', 'From') }}
             {{ Form::date('from', old('from'), array('class' => 'form-control')) }}
         </div>
 
-        <div class="form-group col-sm-12">
+        <div class="form-group col-sm-6">
             {{ Form::label('to', 'To') }}
             {{ Form::date('to', old('to'), array('class' => 'form-control')) }}
         </div>
-
+    </div>
+    <div class="row">
         <div class="col-xs-4">
             <div class="form-group area-checkbox" style="background-color: {{config('areas.main.color')}}" for="main">
                 {{ Form::label('main', 'Main', ['class' => 'checkbox-label']) }}
@@ -38,6 +40,12 @@
                 <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> There's a conflit with the dates you've selected: </p>
                 <span id="conflict-info"></span>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="form-group col-sm-12">
+            {{ Form::label('type', 'Booking Type') }}
+            {{ Form::select('type', array('1' => 'Tentative', '2' => 'Locked In'), old('type', 2), array('class' => 'form-control')) }}
         </div>
     </div>
     <div class="row">

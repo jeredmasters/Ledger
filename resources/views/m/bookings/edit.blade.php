@@ -9,24 +9,30 @@
         <h1>Edit Booking</h1>
 
 
-        {{ Form::model($booking, array('route' => array('bookings.update', $booking->id), 'method' => 'PUT')) }}
+        {{ Form::model($booking, array('route' => array('bookings.update', $booking->id), 'method' => 'PUT', 'class'=>'booking-form')) }}
 
-            <div class="row booking-form">
-                <div class="form-group col-sm-12">
+            <div class="row">
+                <div class="form-group col-sm-6">
                     {{ Form::label('name', 'Name') }}
                     {{ Form::text('name', null, array('class' => 'form-control')) }}
                 </div>
-
-                <div class="form-group col-sm-12">
+                <div class="form-group col-sm-6">
+                    {{ Form::label('type', 'Type') }}
+                    {{ Form::select('type', array('1' => 'Tentative', '2' => 'Locked In'), $booking->type, array('class' => 'form-control')) }}
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
                     {{ Form::label('from', 'From') }}
                     {{ Form::date('from', $booking->from, array('class' => 'form-control')) }}
                 </div>
 
-                <div class="form-group col-sm-12">
+                <div class="form-group col-sm-6">
                     {{ Form::label('to', 'To') }}
                     {{ Form::date('to', $booking->to, array('class' => 'form-control')) }}
                 </div>
-
+            </div>
+            <div class="row">
                 <div class="col-xs-4">
                     <div class="form-group area-checkbox" style="background-color: {{config('areas.main.color')}}" for="main">
                         {{ Form::label('main', 'Main', ['class' => 'checkbox-label']) }}
@@ -57,6 +63,10 @@
                 </div>
             </div>
 
+        {{ Form::close() }}
+        {{ Form::open(array('url' => '/m/bookings/' . $booking->id, 'class' => 'pull-right')) }}
+            {{ Form::hidden('_method', 'DELETE') }}
+            {{ Form::submit('Delete', array('class' => 'btn btn-warning')) }}
         {{ Form::close() }}
     </div>
     <script>

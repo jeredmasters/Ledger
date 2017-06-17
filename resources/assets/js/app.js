@@ -14,6 +14,7 @@ $(document).ready(function (){
 		eventLimit: true,
         events: window.calendar.events,
         dayClick: function(date, jsEvent, view, resourceObj) {
+            window.calendar.selectedEvent = -1;
             $('#from').val(date.format());
             $('#to').val(date.add(1, 'day').format());
             $('#bookingForm').modal('show');
@@ -21,6 +22,11 @@ $(document).ready(function (){
         },
         eventClick: function (event){
             window.location = '/m/bookings/'+event.id+'/edit';
+        },
+        eventRender: function(event, element) {
+            if (event.type == 2){
+                element.html(event.title + ' <i class="fa fa-lock" aria-hidden="true"></i>');
+            }
         }
     });
 });
@@ -59,11 +65,17 @@ function checkDates(){
 }
 function checkDate(date, main, flat, studio){
     var e = _.filter(window.calendar.events, function (event){
-        return (event.start < date && event.end >date) && (
-            main && event.area == 'main' ||
-            flat && event.area == 'flat' ||
-            studio && event.area == 'studio'
-        ) && (event.id != window.calendar.selectedEvent);
+        if(date >= event.start && date <= event.end){
+            if( main && event.area == 'main' ||
+                flat && event.area == 'flat' ||
+                studio && event.area == 'studio'
+            ){
+                if(event.id != window.calendar.selectedEvent){
+                    return true;
+                }
+            }
+        }
+        return false;
     });
     return (e.length > 0 ? e : false);
 }

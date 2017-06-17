@@ -16,10 +16,14 @@ class SimpleAuth
     public function handle($request, Closure $next, $level = 1)
     {
         $user = $request->session()->get('user', null);
-        $user = User::find($user->id);
-        if ($request->session()->get('user', null) === null || $user->access < $level){
-            return redirect()->route('welcome');
+
+        if ($user !== null){
+            $user = User::find($user->id);
+            if($user->access >= $level){
+                return $next($request);
+            }
         }
         return $next($request);
+        return redirect()->route('welcome');
     }
 }

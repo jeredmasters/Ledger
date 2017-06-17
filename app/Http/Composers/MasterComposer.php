@@ -11,15 +11,17 @@ class MasterComposer {
         $user = session('user', null);
         if ($user !== null){
             $user = User::find($user->id);
-            $view->with('userName', $user->name);
-            $view->with('userAccess', $user->access);
-            $view->with('userAvatar', $user->avatar);
+            if ($user !== null){
+                $view->with('userName', $user->name);
+                $view->with('userAccess', $user->access);
+                $view->with('userAvatar', $user->avatar);
+                return;
+            }
         }
-        else{
-            $view->with('userName', '');
-            $view->with('userAccess', 0);
-            $view->with('userAvatar', false);
-        }
+        $view->with('userName', '');
+        $view->with('userAccess', 0);
+        $view->with('userAvatar', false);
+
     }
 
 }

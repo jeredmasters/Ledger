@@ -58,12 +58,13 @@ class BookingsController extends Controller
         } else {
             // store
             $booking = new Booking;
-            $booking->name       = $request->get('name');
-            $booking->from      = $request->get('from') . ' 01:01:01';
+            $booking->name    = $request->get('name');
+            $booking->type    = $request->get('type');
+            $booking->from    = $request->get('from') . ' 01:01:01';
             $booking->to      = $request->get('to') . ' 23:59:59';
-            $booking->main      = $request->get('main') == 1;
-            $booking->flat      = $request->get('flat') == 1;
-            $booking->studio      = $request->get('studio') == 1;
+            $booking->main    = $request->get('main') == 1;
+            $booking->flat    = $request->get('flat') == 1;
+            $booking->studio  = $request->get('studio') == 1;
             $booking->user_id = $user->id;
             $booking->save();
 
@@ -133,12 +134,18 @@ class BookingsController extends Controller
         } else {
             // store
             $booking = Booking::find($id);
-            $booking->name       = $request->get('name');
+            $booking->name    = $request->get('name');
+            $booking->type    = $request->get('type');
+            $booking->from    = $request->get('from') . ' 01:01:01';
+            $booking->to      = $request->get('to') . ' 23:59:59';
+            $booking->main    = $request->get('main') == 1;
+            $booking->flat    = $request->get('flat') == 1;
+            $booking->studio  = $request->get('studio') == 1;
             $booking->save();
 
             // redirect
             $request->session()->flash('message', 'Successfully updated booking!');
-            return redirect('/m/bookings');
+            return redirect('/m/calendar');
         }
     }
 
@@ -156,6 +163,6 @@ class BookingsController extends Controller
 
         // redirect
         $request->session()->flash('message', 'Successfully deleted the booking!');
-        return redirect('/m/bookings');
+        return redirect('/m/calendar');
     }
 }
