@@ -88,6 +88,9 @@ $(document).ready(function () {
             $('#to').val(date.add(1, 'day').format());
             $('#bookingForm').modal('show');
             checkDates();
+        },
+        eventClick: function eventClick(event) {
+            window.location = '/m/bookings/' + event.id + '/edit';
         }
     });
 });
@@ -111,7 +114,12 @@ function checkDates() {
     if (conflict) {
         $('#conflict-message').show();
         $('#bookingForm input[type="submit"]').prop('disabled', true);
-        $('#conflict-info').html(conflict.title + ": " + conflict.start.format('MM/DD/YYYY') + " - " + conflict.end.format('MM/DD/YYYY'));
+        var text = [];
+        for (var i in conflict) {
+            text.push(conflict[i].title + ": " + conflict[i].start.format('DD/MM/YYYY') + " - " + conflict[i].end.add(-1, 'day').format('DD/MM/YYYY'));
+        };
+
+        $('#conflict-info').html(text.join('<br/>'));
     } else {
         $('#conflict-message').hide();
         $('#bookingForm input[type="submit"]').prop('disabled', false);
@@ -119,10 +127,11 @@ function checkDates() {
 }
 function checkDate(date, main, flat, studio) {
     var e = _.filter(window.calendar.events, function (event) {
-        return event.start < date && event.end > date && (event.main && main || event.flat && flat || event.studio && studio);
+        return event.start < date && event.end > date && (main && event.area == 'main' || flat && event.area == 'flat' || studio && event.area == 'studio') && event.id != window.calendar.selectedEvent;
     });
-    return e.length > 0 ? _.first(e) : false;
+    return e.length > 0 ? e : false;
 }
+window.checkDates = checkDates;
 
 /***/ }),
 /* 1 */

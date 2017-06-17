@@ -18,26 +18,6 @@
         </div>
     @endif
 
-    {{ Form::open(array('url' => '/m/bookings')) }}
-
-        <div class="form-group">
-            {{ Form::label('name', 'Name') }}
-            {{ Form::text('name', Input::old('name'), array('class' => 'form-control')) }}
-        </div>
-
-        <div class="form-group">
-            {{ Form::label('email', 'Email') }}
-            {{ Form::email('email', Input::old('email'), array('class' => 'form-control')) }}
-        </div>
-
-        <div class="form-group">
-            {{ Form::label('booking_level', 'Booking Level') }}
-            {{ Form::select('booking_level', array('0' => 'Select a Level', '1' => 'Sees Sunlight', '2' => 'Foosball Fanatic', '3' => 'Basement Dweller'), Input::old('booking_level'), array('class' => 'form-control')) }}
-        </div>
-
-        {{ Form::submit('Create the Booking!', array('class' => 'btn btn-primary')) }}
-
-    {{ Form::close() }}
-
+    @include('m.bookings.form')
   </div>
 @endsection

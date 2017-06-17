@@ -69,7 +69,7 @@ class BookingsController extends Controller
 
             // redirect
             $request->session()->flash('message', 'Successfully created booking!');
-            return redirect('/m/bookings');
+            return redirect('/m/calendar');
         }
     }
 
@@ -97,12 +97,20 @@ class BookingsController extends Controller
      */
     public function edit($id)
     {
+        $events = [];
+
+        $bookings = Booking::all();
+        foreach($bookings as $booking){
+            $events = array_merge($events, $booking->toEvents());
+        }
+
         // get the booking
         $booking = Booking::find($id);
 
         // show the view and pass the booking to it
         return view('m.bookings.edit')
-            ->with('booking', $booking);
+            ->with('booking', $booking)
+            ->with('events', $events);
     }
 
     /**

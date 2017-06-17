@@ -1,4 +1,4 @@
-{{ Form::open(array('url' => '/m/bookings')) }}
+{{ Form::open(array('url' => '/m/bookings', 'class' => 'booking-form')) }}
 
     <div class="row">
         <div class="form-group col-sm-12">
@@ -16,26 +16,26 @@
             {{ Form::date('to', old('to'), array('class' => 'form-control')) }}
         </div>
 
-        <div class="col-sm-4">
-            <div class="form-group">
+        <div class="col-xs-4">
+            <div class="form-group area-checkbox" style="background-color: {{config('areas.main.color')}}" for="main">
                 {{ Form::label('main', 'Main', ['class' => 'checkbox-label']) }}
                 {{ Form::checkbox('main', true, old('main', true)) }}
             </div>
 
-            <div class="form-group">
+            <div class="form-group area-checkbox" style="background-color: {{config('areas.flat.color')}}">
                 {{ Form::label('flat', 'Flat', ['class' => 'checkbox-label']) }}
                 {{ Form::checkbox('flat', true, old('flat', false)) }}
             </div>
 
-            <div class="form-group">
+            <div class="form-group area-checkbox" style="background-color: {{config('areas.studio.color')}}">
                 {{ Form::label('studio', 'Studio', ['class' => 'checkbox-label']) }}
                 {{ Form::checkbox('studio', true, old('studio', false)) }}
             </div>
         </div>
-        <div class="col-sm-8">
+        <div class="col-xs-8">
             <div class="conflict-message" id="conflict-message">
 
-                <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> There's a conflit with the dates you've selected</p>
+                <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> There's a conflit with the dates you've selected: </p>
                 <span id="conflict-info"></span>
             </div>
         </div>

@@ -1,0 +1,25 @@
+.booking-form{
+    .area-checkbox{
+        padding: 0 20px;
+        label{
+            padding: 15px 30px;
+            cursor: pointer;
+            margin-bottom: 0;
+        }
+        input{
+            position: relative;
+            top: 8px;
+            float: right;
+            right: 15px;
+        }
+    }
+    .conflict-message{
+        color: #FFF;
+        background-color: #691010;
+        padding: 20px 30px;
+        float: right;
+        p{
+            margin-bottom: 0;
+        }
+    }
+}

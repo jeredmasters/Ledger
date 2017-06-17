@@ -31,9 +31,7 @@ class Booking extends Model
                 'start' => $this->from->format('Y-m-d'), //start time (you can also use Carbon instead of DateTime)
                 'end' => $this->to->format('Y-m-d'), //end time (you can also use Carbon instead of DateTime)
                 'color' => config('areas.main.color'),
-                'main' => $this->main == "1",
-                'flat' => $this->flat == "1",
-                'studio' => $this->studio == "1"
+                'area' => 'main'
             ];
         }
         if ($this->flat){
@@ -44,9 +42,7 @@ class Booking extends Model
                 'start' => $this->from->format('Y-m-d'), //start time (you can also use Carbon instead of DateTime)
                 'end' => $this->to->format('Y-m-d'), //end time (you can also use Carbon instead of DateTime)
                 'color' => config('areas.flat.color'),
-                'main' => $this->main == "1",
-                'flat' => $this->flat == "1",
-                'studio' => $this->studio == "1"
+                'area' => 'flat'
             ];
         }
         if ($this->studio){
@@ -57,9 +53,7 @@ class Booking extends Model
                 'start' => $this->from->format('Y-m-d'), //start time (you can also use Carbon instead of DateTime)
                 'end' => $this->to->format('Y-m-d'), //end time (you can also use Carbon instead of DateTime)
                 'color' => config('areas.studio.color'),
-                'main' => $this->main == "1",
-                'flat' => $this->flat == "1",
-                'studio' => $this->studio == "1"
+                'area' => 'studio'
             ];
         }
         return $events;
