@@ -26,15 +26,19 @@
     </head>
     <body>
         <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-            <a class="navbar-brand" href="#">{{ $userName }}</a>
+            <a class="navbar-brand" href="#">
+
+                {{ $userName }}</a>
 
             <ul class="nav navbar-nav">
-                @if($userAccess >= 1)
+                @if($userAccess >= 2)
                     <li><a href="/m/calendar">Calendar</a></li>
                     <li><a href="/m/bookings">Bookings</a></li>
+                @endif
+                @if($userAccess >= 1)
                     <li><a href="/m/info">Info</a></li>
                 @endif
-                @if($userAccess >= 2)
+                @if($userAccess >= 3)
                     <li><a href="/admin/users">Users</a></li>
                 @endif
             </ul>

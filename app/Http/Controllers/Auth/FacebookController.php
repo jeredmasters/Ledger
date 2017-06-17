@@ -46,7 +46,7 @@ class FacebookController extends Controller
         if ($user == null){
             $user = new User;
             $user->oauth_id = $auth->id;
-            $user->access = 1;
+            $user->access = 2;
         }
         $user->name = $auth->name;
         $user->avatar = $auth->avatar;

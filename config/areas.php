@@ -1,12 +1,12 @@
 <?php
 return [
     'main' => [
-        'color' => '#0A0'
+        'color' => '#2f8a2f'
     ],
     'flat' => [
-        'color' => '#00A'
+        'color' => '#171784'
     ],
     'studio' => [
-        'color' => '#A00'
+        'color' => '#751414'
     ],
 ];

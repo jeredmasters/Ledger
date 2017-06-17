@@ -16,7 +16,7 @@ Route::get('/', function () {
 })->name('welcome');
 
 
-Route::group(['prefix' => '/m','middleware' => 'simpleauth'], function () {
+Route::group(['prefix' => '/m','middleware' => 'simpleauth:2'], function () {
     Route::get('calendar', 'CalendarController@calendar')->name('calendar');
     Route::resource('bookings', 'BookingsController');
     Route::group(['prefix' => 'info'], function () {
@@ -27,7 +27,7 @@ Route::group(['prefix' => '/m','middleware' => 'simpleauth'], function () {
     });
 });
 
-Route::group(['prefix' => '/admin','middleware' => 'simpleauth'], function () {
+Route::group(['prefix' => '/admin','middleware' => 'simpleauth:3'], function () {
     Route::resource('users', 'Admin\UsersController');
 });
 

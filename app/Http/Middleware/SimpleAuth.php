@@ -3,7 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
-
+use App\Models\User;
 class SimpleAuth
 {
     /**
@@ -13,9 +13,11 @@ class SimpleAuth
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $level = 1)
     {
-        if ($request->session()->get('user', null) === null){
+        $user = $request->session()->get('user', null);
+        $user = User::find($user->id);
+        if ($request->session()->get('user', null) === null || $user->access < $level){
             return redirect()->route('welcome');
         }
         return $next($request);

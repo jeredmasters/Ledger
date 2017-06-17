@@ -13,10 +13,12 @@ class MasterComposer {
             $user = User::find($user->id);
             $view->with('userName', $user->name);
             $view->with('userAccess', $user->access);
+            $view->with('userAvatar', $user->avatar);
         }
         else{
             $view->with('userName', '');
             $view->with('userAccess', 0);
+            $view->with('userAvatar', false);
         }
     }
 
