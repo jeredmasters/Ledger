@@ -19,6 +19,12 @@ Route::get('/', function () {
 Route::group(['prefix' => '/m','middleware' => 'simpleauth'], function () {
     Route::get('calendar', 'CalendarController@calendar')->name('calendar');
     Route::resource('bookings', 'BookingsController');
+    Route::group(['prefix' => 'info'], function () {
+        Route::get('/', function () { return view('m.info.index'); });
+        Route::get('main', function () { return view('m.info.main'); });
+        Route::get('flat', function () { return view('m.info.flat'); });
+        Route::get('studio', function () { return view('m.info.studio'); });
+    });
 });
 
 Route::group(['prefix' => '/admin','middleware' => 'simpleauth'], function () {

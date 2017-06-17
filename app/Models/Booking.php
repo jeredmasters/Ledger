@@ -26,7 +26,7 @@ class Booking extends Model
         if ($this->main){
             $events[] = [
                 'id' => $this->id,
-                'title' => $this->name, //event title
+                'title' => $this->name . ' - Main', //event title
                 'allDay' => true, //full day event?
                 'start' => $this->from->format('Y-m-d'), //start time (you can also use Carbon instead of DateTime)
                 'end' => $this->to->format('Y-m-d'), //end time (you can also use Carbon instead of DateTime)
@@ -39,7 +39,7 @@ class Booking extends Model
         if ($this->flat){
             $events[] = [
                 'id' => $this->id,
-                'title' => $this->name, //event title
+                'title' => $this->name . ' - Flat', //event title
                 'allDay' => true, //full day event?
                 'start' => $this->from->format('Y-m-d'), //start time (you can also use Carbon instead of DateTime)
                 'end' => $this->to->format('Y-m-d'), //end time (you can also use Carbon instead of DateTime)
@@ -52,7 +52,7 @@ class Booking extends Model
         if ($this->studio){
             $events[] = [
                 'id' => $this->id,
-                'title' => $this->name, //event title
+                'title' => $this->name . ' - Studio', //event title
                 'allDay' => true, //full day event?
                 'start' => $this->from->format('Y-m-d'), //start time (you can also use Carbon instead of DateTime)
                 'end' => $this->to->format('Y-m-d'), //end time (you can also use Carbon instead of DateTime)

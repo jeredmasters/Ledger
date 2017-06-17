@@ -32,6 +32,7 @@
                 @if($userAccess >= 1)
                     <li><a href="/m/calendar">Calendar</a></li>
                     <li><a href="/m/bookings">Bookings</a></li>
+                    <li><a href="/m/info">Info</a></li>
                 @endif
                 @if($userAccess >= 2)
                     <li><a href="/admin/users">Users</a></li>

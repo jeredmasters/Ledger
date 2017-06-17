@@ -4,12 +4,6 @@
 
 @section('title', 'Page Title')
 
-@section('sidebar')
-    @parent
-
-    <p>This is appended to the master sidebar.</p>
-@endsection
-
 @section('content')
   <div class="jumbotron">
     <h1>Bookings</h1>
@@ -30,7 +24,7 @@
                 <td>{{ $value->to->diffInDays($value->from) }}</td>
                 <td>{{ $value->name }}</td>
                 <td>{{ $value->areas() }}</td>
-                
+
 
                 <!-- we will also add show, edit, and delete buttons -->
                 <td>
