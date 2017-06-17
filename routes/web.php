@@ -27,7 +27,7 @@ Route::group(['prefix' => '/m','middleware' => 'simpleauth:2'], function () {
     });
 });
 
-Route::group(['prefix' => '/admin','middleware' => 'simpleauth:3'], function () {
+Route::group(['prefix' => '/admin','middleware' => 'simpleauth:2'], function () {
     Route::resource('users', 'Admin\UsersController');
 });
 

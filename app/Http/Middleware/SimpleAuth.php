@@ -19,11 +19,10 @@ class SimpleAuth
 
         if ($user !== null){
             $user = User::find($user->id);
-            if($user->access >= $level){
+            if ($user !== null && $user->access >= $level){
                 return $next($request);
             }
         }
-        return $next($request);
         return redirect()->route('welcome');
     }
 }
