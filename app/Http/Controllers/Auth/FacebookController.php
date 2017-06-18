@@ -24,12 +24,11 @@ class FacebookController extends Controller
      *
      * @return Response
      */
-    public function handleProviderCallback()
+    public function handleProviderCallback(Request $request)
     {
-        $user = Socialite::driver('facebook')->user();
+        $fb_user = Socialite::driver('facebook')->user();
 
-        // $user->token;
-        return response()->json($user);
+        return $this->loginUser($fb_user, $request);
     }
 
     /**
@@ -40,17 +39,21 @@ class FacebookController extends Controller
     public function handleJsPush(Request $request)
     {
         $token = $request->input('token');
-        $auth = Socialite::driver('facebook')->userFromToken($token);
+        $fb_user = Socialite::driver('facebook')->userFromToken($token);
+        return $this->loginUser($fb_user, $request);
+    }
 
-        $user = User::where('oauth_id','=',$auth->id)->first();
+    private function loginUser($fb_user, $request){
+
+        $user = User::where('oauth_id','=',$fb_user->id)->first();
         if ($user == null){
             $user = new User;
-            $user->oauth_id = $auth->id;
+            $user->oauth_id = $fb_user->id;
             $user->access = (count(User::all()) == 0 ? 3 : 2);
         }
-        $user->name = $auth->name;
-        $user->avatar = $auth->avatar;
-        $user->email = $auth->email;
+        $user->name = $fb_user->name;
+        $user->avatar = $fb_user->avatar;
+        $user->email = $fb_user->email;
 
 
         $user->save();
