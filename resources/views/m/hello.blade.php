@@ -26,13 +26,13 @@
         </div>
     </div>
     <div class="row quick-links">
-        <div class="col-sm-3">
+        <div class="col-sm-3 col-lg-2">
             <a href="/m/calendar" class="btn btn-primary">Goto Calendar</a>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-3 col-lg-2">
             <a href="/m/bookings?onlyMe=1" class="btn btn-info">See my Bookings</a>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-3 col-lg-2">
             <a href="/m/info" class="btn btn-success">See info about the house</a>
         </div>
     </div>
