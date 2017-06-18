@@ -11,27 +11,32 @@
 @endsection
 
 @section('content')
-    <div class="jumbotron">
-        <h1>Calendar</h1>
-        <div id="calendar">
-        </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <h1>Calendar</h1>
+            <div id="calendar">
+            </div>
 
-        <!-- Modal -->
-        <div class="modal fade" id="bookingForm" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4>Create Booking</h4>
-                    </div>
-                    <div class="modal-body">
-                        @include('m.bookings.form')
-                    </div>
+
+
+        </div>
+    </div>
+
+@endsection
+@section('footer')
+    <!-- Modal -->
+    <div class="modal fade" id="bookingForm" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>Create Booking</h4>
+                </div>
+                <div class="modal-body">
+                    @include('m.bookings.form', ['booking' => $newBooking])
                 </div>
             </div>
         </div>
-
-
     </div>
     <script>
         var events = {!! json_encode($events) !!}

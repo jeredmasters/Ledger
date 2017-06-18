@@ -10,11 +10,12 @@ class CalendarController extends Controller
 {
     public function calendar(Request $request){
         $events = [];
+        $newBooking = Booking::newBooking();
 
         $bookings = Booking::all();
         foreach($bookings as $booking){
             $events = array_merge($events, $booking->toEvents());
         }
-        return view('m.calendar', compact('events'));
+        return view('m.calendar', compact('events', 'newBooking'));
     }
 }

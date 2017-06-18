@@ -31,7 +31,7 @@ class BookingsController extends Controller
      */
     public function create()
     {
-        return view('m.bookings.create');
+        return view('m.bookings.create')->with('newBooking',Booking::newBooking());
     }
 
     /**

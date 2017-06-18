@@ -36,3 +36,11 @@ input[type=checkbox]{
     position: relative;
     cursor: pointer;
 }
+.modal {
+    position: absolute;
+    top: 0 !important;
+    right: 0;
+    left: 0;
+    width: auto;
+    margin: 0;
+}

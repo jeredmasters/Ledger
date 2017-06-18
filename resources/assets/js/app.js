@@ -11,8 +11,9 @@ $(document).ready(function (){
     $('#studio').change(checkDates);
     $('#calendar').fullCalendar({
         header: {"right":"prev,next","left":"title"},
-		eventLimit: true,
+		eventLimit: false,
         events: window.calendar.events,
+        height: "auto",
         dayClick: function(date, jsEvent, view, resourceObj) {
             window.calendar.selectedEvent = -1;
             $('#from').val(date.format());
@@ -27,6 +28,9 @@ $(document).ready(function (){
             if (event.type == 2){
                 element.html(event.title + ' <i class="fa fa-lock" aria-hidden="true"></i>');
             }
+            if (event.type == 1){
+                element.html(event.title + ' <i class="fa fa-question" aria-hidden="true"></i>');
+            }
         }
     });
 });
@@ -39,27 +43,33 @@ function checkDates(){
     var studio = $('#studio').is(":checked");
 
     var conflict = false;
-    while (from < to){
-        conflict = checkDate(from, main, flat, studio);
-        if (conflict !== false){
-            break;
-        }
-        from = from.add(1, 'day');
-    }
-
-    if (conflict){
-        $('#conflict-message').show();
+    if (!(main||flat||studio)){
+        $('#conflict-message').hide();
         $('#bookingForm input[type="submit"]').prop('disabled', true);
-        var text = [];
-        for(var i in conflict){
-            text.push(conflict[i].title + ": " + conflict[i].start.format('DD/MM/YYYY') + " - " + conflict[i].end.add(-1, 'day').format('DD/MM/YYYY'));
-        };
-
-        $('#conflict-info').html(text.join('<br/>'));
     }
     else{
-        $('#conflict-message').hide();
-        $('#bookingForm input[type="submit"]').prop('disabled', false);
+        while (from < to){
+            conflict = checkDate(from, main, flat, studio);
+            if (conflict !== false){
+                break;
+            }
+            from = from.clone().add(1, 'day');
+        }
+
+        if (conflict){
+            $('#conflict-message').show();
+            $('#bookingForm input[type="submit"]').prop('disabled', true);
+            var text = [];
+            for(var i in conflict){
+                text.push(conflict[i].title + ": " + conflict[i].start.format('DD/MM/YYYY') + " - " + conflict[i].end.clone().add(-1, 'day').format('DD/MM/YYYY'));
+            };
+
+            $('#conflict-info').html(text.join('<br/>'));
+        }
+        else{
+            $('#conflict-message').hide();
+            $('#bookingForm input[type="submit"]').prop('disabled', false);
+        }
     }
 
 }

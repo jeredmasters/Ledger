@@ -21,6 +21,23 @@ class Booking extends Model
         }
         return join(',',$areas);
     }
+    public static function newBooking(){
+        $name = 'booking name';
+        $user = session('user', null);
+        if ($user !== null){
+            $name = $user->name;
+        }
+        return (object)[
+            'id' => null,
+            'name' => explode(' ',$name)[0],
+            'type' => 2,
+            'from' => new \DateTime,
+            'to' => new \DateTime,
+            'main' => true,
+            'flat' => false,
+            'studio' => false
+        ];
+    }
     public function toEvents(){
         $events = [];
         if ($this->main){

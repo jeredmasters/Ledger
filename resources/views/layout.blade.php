@@ -26,28 +26,38 @@
     </head>
     <body>
         <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
-            <a class="navbar-brand" href="#">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#">{{ $userName }}</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        @if($userAccess >= 2)
+                            <li><a href="/m/calendar">Calendar</a></li>
+                            <li><a href="/m/bookings">Bookings</a></li>
+                        @endif
+                        @if($userAccess >= 1)
+                            <li><a href="/m/info">Info</a></li>
+                        @endif
+                        @if($userAccess >= 3)
+                            <li><a href="/admin/users">Users</a></li>
+                        @endif
+                    </ul>
+                </div>
+                <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
-                {{ $userName }}</a>
-
-            <ul class="nav navbar-nav">
-                @if($userAccess >= 2)
-                    <li><a href="/m/calendar">Calendar</a></li>
-                    <li><a href="/m/bookings">Bookings</a></li>
-                @endif
-                @if($userAccess >= 1)
-                    <li><a href="/m/info">Info</a></li>
-                @endif
-                @if($userAccess >= 3)
-                    <li><a href="/admin/users">Users</a></li>
-                @endif
-            </ul>
-            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-
+                </div>
             </div>
         </nav>
         <div class="container">
             @yield('content')
         </div>
+        @yield('footer')
     </body>
 </html>
