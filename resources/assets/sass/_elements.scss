@@ -37,7 +37,7 @@ input[type=checkbox]{
     cursor: pointer;
 }
 .modal {
-    position: absolute;
+    position: fixed;
     top: 0 !important;
     right: 0;
     left: 0;
