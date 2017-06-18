@@ -9,6 +9,19 @@
     <div class="col-sm-12">
         <h1>Bookings</h1>
 
+        <form class="bookings-filter">
+            <div class="row">
+                <div class="form-group col-sm-4 checkbox">
+                    {{ Form::label('onlyMe', 'Show only my bookings') }}
+                    {{ Form::checkbox('onlyMe', true, old('onlyMe', false)) }}
+                </div>
+                <div class="col-sm-4">
+                    {{ Form::submit('Filter', array('class' => 'btn btn-primary')) }}
+                </div>
+            </div>
+        </form>
+
+
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
@@ -16,6 +29,7 @@
                     <td>Days</td>
                     <td>Name</td>
                     <td>Areas</td>
+                    <td>UserID</td>
                 </tr>
             </thead>
             <tbody>

@@ -34,13 +34,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                   </button>
-                  <a class="navbar-brand" href="#">{{ $userName }}</a>
+                  <a class="navbar-brand" href="/m/hello">{{ $userName }}</a>
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         @if($userAccess >= 2)
                             <li><a href="/m/calendar">Calendar</a></li>
-                            <li><a href="/m/bookings">Bookings</a></li>
+                            <li><a href="/m/bookings?onlyMe=1">Bookings</a></li>
                         @endif
                         @if($userAccess >= 1)
                             <li><a href="/m/info">Info</a></li>

@@ -17,6 +17,9 @@ Route::get('/', function () {
 
 
 Route::group(['prefix' => '/m','middleware' => 'simpleauth:2'], function () {
+    Route::get('hello', function (){
+        return view('m.hello')->with('user', session('user'));
+    })->name('hello');
     Route::get('calendar', 'CalendarController@calendar')->name('calendar');
     Route::resource('bookings', 'BookingsController');
     Route::group(['prefix' => 'info'], function () {

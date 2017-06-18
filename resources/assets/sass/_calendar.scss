@@ -3,5 +3,10 @@
 }
 .fc-event{
     max-height: 17px;
-    overflow: hidden;   
+    overflow: hidden;
+}
+
+.fc-scroller {
+   overflow-y: hidden !important;
+   min-height:360px;
 }

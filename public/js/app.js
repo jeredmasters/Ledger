@@ -83,7 +83,6 @@ $(document).ready(function () {
         header: { "right": "prev,next", "left": "title" },
         eventLimit: false,
         events: window.calendar.events,
-        height: "auto",
         dayClick: function dayClick(date, jsEvent, view, resourceObj) {
             window.calendar.selectedEvent = -1;
             $('#from').val(date.format());

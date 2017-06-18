@@ -57,6 +57,6 @@ class FacebookController extends Controller
 
         $request->session()->put('user', $user);
         // $user->token;
-        return redirect()->route('calendar');
+        return redirect()->route('hello');
     }
 }

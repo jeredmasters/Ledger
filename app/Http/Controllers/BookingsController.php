@@ -14,10 +14,17 @@ class BookingsController extends Controller
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         // get all the bookings
-        $bookings = Booking::all();
+        $bookings = [];
+        if ($request->get('onlyMe') == 1){
+            $user = $request->session()->get('user');
+            $bookings = Booking::where('user_id', '=', $user->id)->get();
+        }
+        else{
+            $bookings = Booking::all();
+        }
 
         // load the view and pass the bookings
         return view('m.bookings.index')

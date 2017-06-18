@@ -17,7 +17,7 @@
         $(document).ready(function (){
             setTimeout(function (){
                 window.checkDates();
-            }, 100);
+            }, 50);
         });
         var events = {!! json_encode($events) !!}
         window.calendar.events = _.forEach(events, function (event){
