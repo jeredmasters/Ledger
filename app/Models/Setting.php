@@ -8,10 +8,10 @@ class Setting extends Model
     protected $table = 'settings';
     protected $json = ['value'];
 
-    public static function get($key, $default = null){
+    public static function get($key){
         $setting = Setting::where('key','=',$key)->first();
         if ($setting == null){
-            return $default;
+            return config('settings.' . $key);
         }
         return $setting->value;
     }

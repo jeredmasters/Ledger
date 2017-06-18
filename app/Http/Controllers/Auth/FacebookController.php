@@ -53,7 +53,7 @@ class FacebookController extends Controller
             $newUser = true;
             $user = new User;
             $user->oauth_id = $fb_user->id;
-            $user->access = Setting::get('default_access',3);
+            $user->access = Setting::get('default_access');
         }
         $user->name = $fb_user->name;
         $user->avatar = $fb_user->avatar;

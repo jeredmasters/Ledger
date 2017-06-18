@@ -46,7 +46,7 @@
                 <div class="col-sm-8">
                     <div class="conflict-message" id="conflict-message">
 
-                        <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> There's a conflit with the dates you've selected: </p>
+                        <p><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> There's a conflict with the dates you've selected: </p>
                         <span id="conflict-info"></span>
                     </div>
                 </div>

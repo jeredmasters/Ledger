@@ -7,9 +7,9 @@
 @section('content')
 <div class="row">
     <div class="col-sm-12">
-        <h1>Setting</h1>
+        <h1>Settings</h1>
 
-        {{ Form::open(array('url' => '/a/settings', 'class' => 'booking-form')) }}
+        {{ Form::open(array('url' => '/a/settings', 'class' => 'setting-form')) }}
 
             <div class="row">
                 <div class="form-group col-sm-8">
