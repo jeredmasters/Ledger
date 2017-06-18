@@ -38,4 +38,5 @@ Route::group(['prefix' => '/login'], function () {
     Route::get('facebook', 'Auth\FacebookController@redirectToProvider');
     Route::get('facebook/push', 'Auth\FacebookController@handleJsPush');
     Route::get('facebook/callback', 'Auth\FacebookController@handleProviderCallback');
+    Route::get('facebook/logout', 'Auth\FacebookController@logout');
 });

@@ -7,7 +7,7 @@
 @section('content')
   <div class="jumbotron">
     <h1>The Ledger</h1>
-    <p>This page authenticates using facebook. The login page should load automatically, if it doesn't just click the login button below</p>
+    <p>Click the login button below to get started!</p>
     <fb:login-button
       scope="public_profile,email"
       onlogin="checkLoginState();">
@@ -19,14 +19,11 @@
       appId      : '1466337873389098',
       cookie     : true,
       xfbml      : true,
-      version    : 'v2.8'
+      version    : 'v2.8',
+      channelUrl : 'http://ledger.jered.cc/channel.html'
     });
     FB.AppEvents.logPageView();
-    checkLoginState(function(connected){
-        if (!connected){
-            FB.login();
-        }
-    });
+    checkLoginState();
   };
 
   (function(d, s, id){
@@ -37,12 +34,8 @@
      fjs.parentNode.insertBefore(js, fjs);
    }(document, 'script', 'facebook-jssdk'));
 
-   function checkLoginState(callback){
+   function checkLoginState(){
        FB.getLoginStatus(function(response) {
-           console.log(response);
-           if (callback !== undefined){
-               callback(response.status == 'connected');
-           }
            if (response.status == 'connected'){
                pushToken(response.authResponse.accessToken);
            }

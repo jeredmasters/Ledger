@@ -59,4 +59,9 @@ class FacebookController extends Controller
         // $user->token;
         return redirect()->route('hello');
     }
+
+    public function logout(Request $request){
+        $request->session()->put('user', null);
+        return view('logout');
+    }
 }

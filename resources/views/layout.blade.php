@@ -49,6 +49,11 @@
                             <li><a href="/admin/users">Users</a></li>
                         @endif
                     </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        @if($userAccess >= 1)
+                            <li><a href="/login/facebook/logout">Logout</a></li>
+                        @endif
+                    </ul>
                 </div>
                 <div class="collapse navbar-collapse" id="navbarsExampleDefault">
 
