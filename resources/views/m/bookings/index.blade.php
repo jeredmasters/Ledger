@@ -11,7 +11,7 @@
 
         <form class="bookings-filter">
             <div class="row">
-                <div class="form-group col-sm-4 checkbox">
+                <div class="form-group col-sm-4 checkbox-wrapper">
                     {{ Form::label('onlyMe', 'Show only my bookings') }}
                     {{ Form::checkbox('onlyMe', true, old('onlyMe', false)) }}
                 </div>

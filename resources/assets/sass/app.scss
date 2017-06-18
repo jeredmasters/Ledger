@@ -1,8 +1,10 @@
 
-// Variables
-@import "variables";
-@import "elements";
-@import "booking-form";
-@import "calendar";
-@import "hello";
-@import "settings";
+// Elements
+@import "elements/modal";
+@import "elements/checkbox";
+
+// Sections
+@import "sections/booking-form";
+@import "sections/calendar";
+@import "sections/hello";
+@import "sections/settings";
