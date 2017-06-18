@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Socialite;
+use App\Models\Setting;
 use App\Models\User;
+use App\Models\Log;
 
 class FacebookController extends Controller
 {
@@ -46,10 +48,12 @@ class FacebookController extends Controller
     private function loginUser($fb_user, $request){
 
         $user = User::where('oauth_id','=',$fb_user->id)->first();
+        $newUser = false;
         if ($user == null){
+            $newUser = true;
             $user = new User;
             $user->oauth_id = $fb_user->id;
-            $user->access = (count(User::all()) == 0 ? 3 : 2);
+            $user->access = Setting::get('default_access',3);
         }
         $user->name = $fb_user->name;
         $user->avatar = $fb_user->avatar;
@@ -58,7 +62,13 @@ class FacebookController extends Controller
 
         $user->save();
 
+
         $request->session()->put('user', $user);
+
+        if ($newUser){
+            Log::user($user->id, 'create', $user);
+        }
+
         // $user->token;
         return redirect()->route('hello');
     }

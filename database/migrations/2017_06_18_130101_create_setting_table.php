@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddForeignKey extends Migration
+class CreateSettingTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class AddForeignKey extends Migration
      */
     public function up()
     {
-        Schema::table('bookings', function (Blueprint $table) {
-            // $table->foreign('user_id')
-            //     ->references('id')->on('users')
-            //     ->onDelete('cascade');
+        Schema::create('settings', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('key');
+            $table->json('value');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +28,6 @@ class AddForeignKey extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bookings');
+        //
     }
 }

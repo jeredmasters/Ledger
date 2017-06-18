@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Booking;
 use Validator;
+use App\Models\Log;
 
 class BookingsController extends Controller
 {
@@ -63,6 +64,7 @@ class BookingsController extends Controller
                 ->withErrors($validator)
                 ->withInput($request->except('password'));
         } else {
+
             // store
             $booking = new Booking;
             $booking->name    = $request->get('name');
@@ -74,6 +76,7 @@ class BookingsController extends Controller
             $booking->studio  = $request->get('studio') == 1;
             $booking->user_id = $user->id;
             $booking->save();
+            Log::booking($booking->id, 'create', $booking);
 
             // redirect
             $request->session()->flash('message', 'Successfully created booking!');
@@ -149,6 +152,7 @@ class BookingsController extends Controller
             $booking->flat    = $request->get('flat') == 1;
             $booking->studio  = $request->get('studio') == 1;
             $booking->save();
+            Log::booking($booking->id, 'update', $booking);
 
             // redirect
             $request->session()->flash('message', 'Successfully updated booking!');
@@ -164,6 +168,8 @@ class BookingsController extends Controller
      */
     public function destroy(Request $request, $id)
     {
+        Log::booking($id, 'delete');
+        
         // delete
         $booking = Booking::find($id);
         $booking->delete();

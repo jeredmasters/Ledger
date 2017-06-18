@@ -36,10 +36,10 @@
                     {{ Form::close() }}
 
                     <!-- show the user (uses the show method found at GET /users/{id} -->
-                    <a class="btn btn-small btn-success" href="{{ URL::to('/admin/users/' . $value->id) }}">Show</a>
+                    <a class="btn btn-small btn-success" href="{{ URL::to('/a/users/' . $value->id) }}">Show</a>
 
                     <!-- edit this user (uses the edit method found at GET /users/{id}/edit -->
-                    <a class="btn btn-small btn-info" href="{{ URL::to('/admin/users/' . $value->id . '/edit') }}">Edit</a>
+                    <a class="btn btn-small btn-info" href="{{ URL::to('/a/users/' . $value->id . '/edit') }}">Edit</a>
 
                 </td>
             </tr>

@@ -30,8 +30,10 @@ Route::group(['prefix' => '/m','middleware' => 'simpleauth:2'], function () {
     });
 });
 
-Route::group(['prefix' => '/admin','middleware' => 'simpleauth:2'], function () {
+Route::group(['prefix' => '/a','middleware' => 'simpleauth:2'], function () {
     Route::resource('users', 'Admin\UsersController');
+    Route::resource('log', 'Admin\LogController');
+    Route::resource('settings', 'Admin\SettingController');
 });
 
 Route::group(['prefix' => '/login'], function () {

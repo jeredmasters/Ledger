@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Validator;
+use App\Models\Log;
 
 class UsersController extends Controller
 {
@@ -20,7 +21,7 @@ class UsersController extends Controller
         $users = User::all();
 
         // load the view and pass the users
-        return view('admin.users.index')
+        return view('a.users.index')
             ->with('users', $users);
     }
 
@@ -31,7 +32,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('admin.users.create');
+        return view('a.users.create');
     }
 
     /**
@@ -49,16 +50,18 @@ class UsersController extends Controller
 
         // process the login
         if ($validator->fails()) {
-            return Redirect::to('users/create')
+            return redirect('users/create')
                 ->withErrors($validator)
-                ->withInput(Input::except('password'));
+                ->withInput($request->except('password'));
         } else {
             // store
             $user = new User;
-            $user->name       = Input::get('name');
-            $user->email      = Input::get('email');
-            $user->user_level = Input::get('user_level');
+            $user->name       = $request->get('name');
+            $user->email      = $request->get('email');
+            $user->access     = $request->get('access');
             $user->save();
+
+            Log::user($user->id, 'create', $user);
 
             // redirect
             Session::flash('message', 'Successfully created user!');
@@ -78,7 +81,7 @@ class UsersController extends Controller
         $user = User::find($id);
 
         // show the view and pass the user to it
-        return view('admin.users.show')
+        return view('a.users.show')
             ->with('user', $user);
     }
 
@@ -94,7 +97,7 @@ class UsersController extends Controller
         $user = User::find($id);
 
         // show the view and pass the user to it
-        return view('admin.users.edit')
+        return view('a.users.edit')
             ->with('user', $user);
     }
 
@@ -125,9 +128,11 @@ class UsersController extends Controller
             $user->access     = $request->get('access');
             $user->save();
 
+            Log::user($user->id, 'update', $user);
+
             // redirect
             $request->session()->flash('message', 'Successfully updated user!');
-            return redirect('/admin/users');
+            return redirect('/a/users');
         }
     }
 
@@ -139,6 +144,7 @@ class UsersController extends Controller
      */
     public function destroy(Request $request, $id)
     {
+        Log::user($id, 'delete');
         // delete
         $user = User::find($id);
         $user->delete();

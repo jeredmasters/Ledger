@@ -46,7 +46,14 @@
                             <li><a href="/m/info">Info</a></li>
                         @endif
                         @if($userAccess >= 3)
-                            <li><a href="/admin/users">Users</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/a/users">Users</a></li>
+                                    <li><a href="/a/settings">Setting</a></li>
+                                    <li><a href="/a/log">System Log</a></li>
+                                </ul>
+                            </li>
                         @endif
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
