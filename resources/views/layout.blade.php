@@ -50,7 +50,7 @@
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin <span class="caret"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="/a/users">Users</a></li>
-                                    <li><a href="/a/settings">Setting</a></li>
+                                    <li><a href="/a/settings">Settings</a></li>
                                     <li><a href="/a/log">System Log</a></li>
                                 </ul>
                             </li>
