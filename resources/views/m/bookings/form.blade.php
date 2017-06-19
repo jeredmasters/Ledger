@@ -28,19 +28,22 @@
             </div>
             <div class="row">
                 <div class="col-sm-4">
-                    <div class="form-group checkbox-wrapper" style="background-color: {{config('areas.main.color')}}" for="main">
-                        {{ Form::label('main', 'Main', ['class' => 'checkbox-label']) }}
-                        {{ Form::checkbox('main', true, $booking->main) }}
+                    <div class="form-group checkbox-wrapper" style="background-color: {{config('areas.main.color')}}" data-for="main">
+                        <label for="main" class="checkbox-label">
+                            Main {{ Form::checkbox('main', true, $booking->main, ['id'=>'main']) }}
+                        </label>
                     </div>
 
-                    <div class="form-group checkbox-wrapper" style="background-color: {{config('areas.flat.color')}}">
-                        {{ Form::label('flat', 'Flat', ['class' => 'checkbox-label']) }}
-                        {{ Form::checkbox('flat', true, $booking->flat) }}
+                    <div class="form-group checkbox-wrapper" style="background-color: {{config('areas.flat.color')}}" data-for="flat">
+                        <label for="flat" class="checkbox-label">
+                            Flat {{ Form::checkbox('flat', true, $booking->flat, ['id'=>'flat']) }}
+                        </label>
                     </div>
 
-                    <div class="form-group checkbox-wrapper" style="background-color: {{config('areas.studio.color')}}">
-                        {{ Form::label('studio', 'Studio', ['class' => 'checkbox-label']) }}
-                        {{ Form::checkbox('studio', true, $booking->studio) }}
+                    <div class="form-group checkbox-wrapper" style="background-color: {{config('areas.studio.color')}}" data-for="studio">
+                        <label for="studio" class="checkbox-label">
+                            Studio {{ Form::checkbox('studio', true, $booking->studio, ['id'=>'studio']) }}
+                        </label>
                     </div>
                 </div>
                 <div class="col-sm-8">

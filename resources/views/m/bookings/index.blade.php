@@ -11,11 +11,12 @@
 
         <form class="bookings-filter">
             <div class="row">
-                <div class="form-group col-sm-4 checkbox-wrapper">
-                    {{ Form::label('onlyMe', 'Show only my bookings') }}
-                    {{ Form::checkbox('onlyMe', true, old('onlyMe', false)) }}
+                <div class="form-group col-xs-8 checkbox-wrapper">
+                    <label for="onlyMe" class="checkbox-label">
+                        Show only my bookings {{ Form::checkbox('onlyMe', old('onlyMe', false), ['id'=>'onlyMe']) }}
+                    </label>
                 </div>
-                <div class="col-sm-4">
+                <div class="col-xs-4">
                     {{ Form::submit('Filter', array('class' => 'btn btn-primary')) }}
                 </div>
             </div>
