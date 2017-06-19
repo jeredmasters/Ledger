@@ -21,10 +21,10 @@ class BookingsController extends Controller
         $bookings = [];
         if ($request->get('onlyMe') == 1){
             $user = $request->session()->get('user');
-            $bookings = Booking::where('user_id', '=', $user->id)->get();
+            $bookings = Booking::active()->where('user_id', '=', $user->id)->get();
         }
         else{
-            $bookings = Booking::all();
+            $bookings = Booking::active()->get();
         }
 
         // load the view and pass the bookings
@@ -110,7 +110,7 @@ class BookingsController extends Controller
     {
         $events = [];
 
-        $bookings = Booking::all();
+        $bookings = Booking::active()->get();
         foreach($bookings as $booking){
             $events = array_merge($events, $booking->toEvents());
         }
@@ -169,10 +169,11 @@ class BookingsController extends Controller
     public function destroy(Request $request, $id)
     {
         Log::booking($id, 'delete');
-        
+
         // delete
         $booking = Booking::find($id);
-        $booking->delete();
+        $booking->active = false;
+        $booking->save();
 
         // redirect
         $request->session()->flash('message', 'Successfully deleted the booking!');

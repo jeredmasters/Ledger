@@ -12,7 +12,7 @@ class CalendarController extends Controller
         $events = [];
         $newBooking = Booking::newBooking();
 
-        $bookings = Booking::all();
+        $bookings = Booking::active()->get();
         foreach($bookings as $booking){
             $events = array_merge($events, $booking->toEvents());
         }

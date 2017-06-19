@@ -21,7 +21,7 @@ class LogController extends Controller
     public function index()
     {
         // get all the users
-        $logs = Log::all();
+        $logs = Log::orderBy('created_at','DESC')->get();
 
         foreach($logs as $log){
             $log->item = $this->getItem($log->item_type,$log->item_id);

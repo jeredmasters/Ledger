@@ -23,6 +23,7 @@ class CreateBookingsTable extends Migration
             $table->boolean('studio');
             $table->datetime('from');
             $table->datetime('to');
+            $table->boolean('active')->default(true);
             $table->timestamps();
         });
         Schema::table('bookings', function (Blueprint $table) {

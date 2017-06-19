@@ -9,8 +9,11 @@ class Booking extends Model
     protected $table = 'bookings';
 
     public static function bookings($date){
-        $bookings = Booking::where('from','<=',$date)->where('to', '>=', $date)->get();
+        $bookings = Booking::active()->where('from','<=',$date)->where('to', '>=', $date)->get();
         return $bookings;
+    }
+    public static function active(){
+        return Booking::where('active','=',true);
     }
     public function areas(){
         $areas = [];
