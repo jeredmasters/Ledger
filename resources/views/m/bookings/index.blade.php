@@ -35,7 +35,7 @@
             <tbody>
             @foreach($bookings as $key => $value)
                 <tr>
-                    <td>{{ $value->from->format('Y-m-d') }}</td>
+                    <td>{{ $value->from->format('Y-m-d D') }}</td>
                     <td>{{ $value->to->diffInDays($value->from) }}</td>
                     <td>{{ $value->name }}</td>
                     <td>{{ $value->areas() }}</td>

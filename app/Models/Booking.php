@@ -8,6 +8,10 @@ class Booking extends Model
     protected $dates = ['from','to'];
     protected $table = 'bookings';
 
+    public static function bookings($date){
+        $bookings = Booking::where('from','<=',$date)->where('to', '>=', $date)->get();
+        return $bookings;
+    }
     public function areas(){
         $areas = [];
         if ($this->main){

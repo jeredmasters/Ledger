@@ -19,7 +19,7 @@ class CreateLogTable extends Migration
             $table->string('item_type')->nullable();
             $table->integer('item_id')->nullabel();
             $table->string('event');
-            $table->json('data');
+            $table->json('data')->nullable();
             $table->timestamps();
         });
         Schema::table('log', function (Blueprint $table) {
