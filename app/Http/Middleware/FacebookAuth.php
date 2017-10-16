@@ -37,7 +37,9 @@ class FacebookAuth
           }
         }
 
-        return redirect()->route('welcome');
+        return response()->json([
+          'errors' => 'not allowed',
+          'successful' => false ], 403);
     }
 }
 
