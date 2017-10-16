@@ -28,7 +28,7 @@ class Log extends Model
             $log->item_id = $id;
             $log->event = $event;
             $log->data = $data;
-            $log->save();
+            // $log->save();
         }
     }
 }
