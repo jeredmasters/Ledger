@@ -42,6 +42,7 @@ class InfoController extends BaseController
             $info = InfoContent::handle($request->get('handle'));
             $info->title       = $request->get('title');
             $info->content       = $request->get('content');
+            $info->parent       = $request->get('parent');
             $info->save();
 
             // Log::user($info->id, 'create', $user);
@@ -71,7 +72,8 @@ class InfoController extends BaseController
           // store
           $info = InfoContent::handle($request->get('handle'));
           $info->title       = $request->get('title');
-          $info->content = $request->get('content');          
+          $info->content = $request->get('content');     
+          $info->parent       = $request->get('parent');     
           $info->save();
 
           // Log::user($info->id, 'create', $user);
@@ -88,13 +90,13 @@ class InfoController extends BaseController
      */
     public function destroy(Request $request, $id)
     {
-        Log::user($id, 'delete');
+        // Log::user($id, 'delete');
         // delete
-        $user = User::find($id);
-        $user->delete();
+        $info = InfoContent::handle($request->get('handle'));
+        if ($info != null){
+          $info->delete();
+        }
 
-        // redirect
-        $request->session()->flash('message', 'Successfully deleted the user!');
-        return response()->redirect('users');
+        return $this->json(true);
     }
 }
