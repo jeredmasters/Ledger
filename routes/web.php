@@ -19,11 +19,12 @@ Route::post('logout', 'Api\AuthController@login');
 Route::group(['prefix' => '/b','middleware' => 'facebookauth:2'], function () {
   Route::resource('bookings', 'Api\BookingsController');
   Route::post('whoami', 'Api\AuthController@whoami');
+  Route::resource('info', 'Api\InfoController');
 });
 Route::group(['prefix' => '/a','middleware' => 'facebookauth:3'], function () {
   Route::apiResource('users', 'Api\UsersController');
   Route::apiResource('log', 'Api\LogController');
-  Route::apiResource('settings', 'Api\SettingController');
+  Route::apiResource('settings', 'Api\SettingController');  
 });
 
 // Route::get('/', 'WelcomeController@welcome')->name('welcome');
